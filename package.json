@@ -7,9 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "jest"
+    "test": "jest",
+    "b-dev": "next dev --webpack",
+    "b-build": "next build --webpack"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.7.0",
+    "@supabase/supabase-js": "^2.78.0",
     "next": "16.0.1",
     "react": "19.2.0",
     "react-dom": "19.2.0"
