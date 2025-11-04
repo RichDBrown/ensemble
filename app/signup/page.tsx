@@ -25,7 +25,7 @@ export default function SignUpPage() {
         data: {
           firstName: firstName,
         },
-        emailRedirectTo: "https://ensemble-woad.vercel.app/",
+        emailRedirectTo: "https://ensemble-woad.vercel.app/dashboard/",
       },
     });
     if (error) {
