@@ -1,8 +1,41 @@
+"use client";
+
 import Image from "next/image";
 import Logo from "@/public/logo.png";
 import Link from "next/link";
+import { createClient } from "../_utils/_api/supabase-browser-client";
+import { FormEvent, useState } from "react";
+import ConfirmEmailDialog from "./_ui/confirm-email-dialog";
 
 export default function SignUpPage() {
+  const [isErrorSigningUp, setIsErrorSigningUp] = useState<boolean>(false);
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+
+  async function signUpWithEmail(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const email = (form.elements.namedItem("email") as HTMLInputElement).value;
+    const firstName = (form.elements.namedItem("firstName") as HTMLInputElement)
+      .value;
+
+    const supabase = createClient();
+    const { data, error } = await supabase.auth.signInWithOtp({
+      email: email,
+      options: {
+        data: {
+          firstName: firstName,
+        },
+        emailRedirectTo: "https://ensemble-woad.vercel.app/",
+      },
+    });
+    if (error) {
+      setIsErrorSigningUp(true);
+    } else {
+      setIsDialogOpen(true);
+      form.reset();
+    }
+  }
+
   return (
     <main className="flex flex-col items-center pt-16 px-4">
       <div className="flex items-center gap-x-4">
@@ -17,57 +50,36 @@ export default function SignUpPage() {
             Sign in
           </Link>
         </p>
-        <form className="mt-8 space-y-6" action="#" method="POST">
-          <div className="rounded-md space-y-4">
-            <input
-              id="name"
-              name="name"
-              type="text"
-              required
-              className="appearance-none relative block w-full px-3 py-2 border border-outline placeholder:text-on-surface-variant text-on-surface bg-surface-container rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm"
-              placeholder="Full name"
-            />
-            <div>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                className="appearance-none relative block w-full px-3 py-2 border border-outline placeholder:text-on-surface-variant text-on-surface bg-surface-container rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm"
-                placeholder="Email"
-              />
-            </div>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              autoComplete="new-password"
-              required
-              className="appearance-none relative block w-full px-3 py-2 border border-outline placeholder:text-on-surface-variant text-on-surface bg-surface-container rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm"
-              placeholder="Password"
-            />
-            <input
-              id="confirm-password"
-              name="confirm-password"
-              type="password"
-              autoComplete="new-password"
-              required
-              className="appearance-none relative block w-full px-3 py-2 border border-outline placeholder:text-on-surface-variant text-on-surface bg-surface-container rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm"
-              placeholder="Re-enter password"
-            />
-          </div>
-
-          <div>
-            <button
-              type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-on-primary bg-primary hover:bg-primary-container focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-background"
-            >
-              Sign up
-            </button>
-          </div>
+        <form
+          onSubmit={signUpWithEmail}
+          className="flex flex-col mt-6 w-full"
+          aria-label="Email form"
+        >
+          <input
+            name="firstName"
+            placeholder="First name"
+            required
+            className="appearance-none w-full mt-4 p-4 border border-outline outline-none rounded-sm focus:ring-3 focus:ring-primary focus:border-transparent"
+          />
+          <input
+            name="email"
+            type="email"
+            placeholder="Email"
+            autoComplete="email"
+            required
+            className="appearance-none w-full mt-4 p-4 border border-outline outline-none rounded-sm focus:ring-3 focus:ring-primary focus:border-transparent"
+          />
+          <button className="mt-4 w-full h-12 text-sm font-medium text-on-primary bg-primary rounded-2xl hover:bg-[#AFCFFB] active:bg-[#AFCFFB] cursor-pointer transition-colors">
+            Sign up
+          </button>
+          {isErrorSigningUp && (
+            <p className="self-center text-sm text-error mt-4">
+              An error has occurred please try again later
+            </p>
+          )}
         </form>
       </div>
+      {isDialogOpen && <ConfirmEmailDialog setIsDialogOpen={setIsDialogOpen} />}
     </main>
   );
 }
