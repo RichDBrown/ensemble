@@ -1,10 +1,11 @@
 "use client";
+
 import Image from "next/image";
 import Logo from "@/public/logo.svg";
 import Link from "next/link";
-import { createClient } from "../_utils/_api/supabase-browser-client";
+import { createClient } from "../../_utils/_api/supabase-browser-client";
 import { FormEvent, useState } from "react";
-import ConfirmEmailDialog from "../signup/_ui/confirm-email-dialog";
+import ConfirmEmailDialog from "../_ui/confirm-email-dialog";
 
 export default function SignInPage() {
   const [isErrorSigningIn, setIsErrorSigningIn] = useState<boolean>(false);
@@ -27,7 +28,6 @@ export default function SignInPage() {
       },
     });
     if (error) {
-      console.error("Error signing in:", error);
       setIsErrorSigningIn(true);
     } else {
       setIsDialogOpen(true);
@@ -51,7 +51,7 @@ export default function SignInPage() {
         <h2 className="text-3xl font-medium">Sign In</h2>
         <p className="mt-1 text-sm text-on-surface-variant">
           Don&apos;t have an account?{" "}
-          <Link href="/signup" className="text-primary">
+          <Link href="/auth/signup" className="text-primary">
             Sign up
           </Link>
         </p>
@@ -73,14 +73,12 @@ export default function SignInPage() {
           </button>
           {isErrorSigningIn && (
             <p className="self-center text-sm text-error mt-4">
-              An error has occurred please try again later
+              An error has occurred. Please check your email is correct.
             </p>
           )}
         </form>
-        {isDialogOpen && (
-          <ConfirmEmailDialog setIsDialogOpen={setIsDialogOpen} />
-        )}
       </div>
+      {isDialogOpen && <ConfirmEmailDialog setIsDialogOpen={setIsDialogOpen} />}
     </main>
   );
 }
