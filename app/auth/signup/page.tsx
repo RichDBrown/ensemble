@@ -1,11 +1,10 @@
 "use client";
-
 import Image from "next/image";
 import Logo from "@/public/logo.svg";
 import Link from "next/link";
-import { createClient } from "../_utils/_api/supabase-browser-client";
+import { createClient } from "../../_utils/_api/supabase-browser-client";
 import { FormEvent, useState } from "react";
-import ConfirmEmailDialog from "./_ui/confirm-email-dialog";
+import ConfirmEmailDialog from "../_ui/confirm-email-dialog";
 
 export default function SignUpPage() {
   const [isErrorSigningUp, setIsErrorSigningUp] = useState<boolean>(false);
@@ -25,7 +24,7 @@ export default function SignUpPage() {
         data: {
           firstName: firstName,
         },
-        emailRedirectTo: "https://ensemble-woad.vercel.app/dashboard/",
+        emailRedirectTo: process.env.NEXT_PUBLIC_SIGNUP_REDIRECT,
       },
     });
     if (error) {
@@ -52,7 +51,7 @@ export default function SignUpPage() {
         <h2 className="text-3xl font-medium">Sign Up</h2>
         <p className="mt-1 text-sm text-on-surface-variant">
           Already have an account?{" "}
-          <Link href="/login" className="text-primary">
+          <Link href="/auth/signin" className="text-primary">
             Sign in
           </Link>
         </p>
@@ -80,7 +79,7 @@ export default function SignUpPage() {
           </button>
           {isErrorSigningUp && (
             <p className="self-center text-sm text-error mt-4">
-              An error has occurred please try again later
+              An error has occurred please try again later.
             </p>
           )}
         </form>

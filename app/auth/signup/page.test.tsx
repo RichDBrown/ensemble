@@ -71,6 +71,7 @@ describe("SignUpPage", () => {
       name: "Sign in",
     });
     expect(link).toHaveClass("text-primary");
+    expect(link).toHaveAttribute("href", "/auth/signin");
   });
 
   it("renders form correctly", () => {
@@ -122,7 +123,7 @@ describe("SignUpPage", () => {
     await user.click(signUpButton);
 
     const errorMessage = screen.getByText(
-      "An error has occurred please try again later"
+      "An error has occurred please try again later."
     );
     expect(errorMessage).toHaveClass("self-center mt-4 text-sm text-error");
   });
