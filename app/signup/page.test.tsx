@@ -4,7 +4,7 @@ import userEvent, { UserEvent } from "@testing-library/user-event";
 
 const signInWithOtpMock = jest.fn();
 
-jest.mock("@/app/_utils/_api/supabase-browser-client", () => ({
+jest.mock("@/app/_utils/supabase/browser-client", () => ({
   createClient: jest.fn(() => ({
     auth: {
       signInWithOtp: signInWithOtpMock,
@@ -83,7 +83,6 @@ describe("SignUpPage", () => {
     expect(firstNameInput).toHaveClass(
       "appearance-none w-full mt-4 p-4 border border-outline outline-none rounded-sm focus:ring-3 focus:ring-primary focus:border-transparent"
     );
-    expect;
     expect(firstNameInput).toHaveAttribute("name", "firstName");
     expect(firstNameInput).toHaveAttribute("required");
   });

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Logo from "@/public/logo.svg";
 import Link from "next/link";
-import { createClient } from "../_utils/_api/supabase-browser-client";
+import { createClient } from "../_utils/supabase/browser-client";
 import { FormEvent, useState } from "react";
 import ConfirmEmailDialog from "./_ui/confirm-email-dialog";
 
@@ -25,7 +25,7 @@ export default function SignUpPage() {
         data: {
           firstName: firstName,
         },
-        emailRedirectTo: "https://ensemble-woad.vercel.app/dashboard/",
+        emailRedirectTo: process.env.NEXT_PUBLIC_SIGNUP_REDIRECT,
       },
     });
     if (error) {

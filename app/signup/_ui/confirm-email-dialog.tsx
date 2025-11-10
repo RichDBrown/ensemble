@@ -8,7 +8,7 @@ export default function ConfirmEmailDialog({
   setIsDialogOpen,
 }: ConfirmEmailDialogProps) {
   return (
-    <div className="fixed flex justify-center items-center px-4 top-0 w-full h-screen bg-scrim/32">
+    <div className="fixed flex justify-center items-center z-20 px-4 top-0 w-full h-screen bg-scrim/32">
       <div
         role="dialog"
         className="flex flex-col w-full px-6 pt-6 pb-5 bg-surface-container-high rounded-3xl"
