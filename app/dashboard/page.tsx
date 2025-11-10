@@ -19,7 +19,7 @@ export default function DashboardPage() {
       } = await supabase.auth.getUser();
 
       if (!user) {
-        router.replace("/signin");
+        router.replace("/auth/signin");
       }
     }
 

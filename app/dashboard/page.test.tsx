@@ -2,12 +2,10 @@ import { act, render, screen, waitFor } from "@testing-library/react";
 import DashboardPage from "./page";
 import userEvent, { UserEvent } from "@testing-library/user-event";
 
-const replaceMock = jest.fn();
-
 jest.mock("next/navigation", () => ({
   useRouter: () => ({
     push: jest.fn(),
-    replace: replaceMock,
+    replace: jest.fn(),
     refresh: jest.fn(),
     prefetch: jest.fn(),
   }),
