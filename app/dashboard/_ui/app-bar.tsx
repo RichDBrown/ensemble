@@ -36,7 +36,7 @@ export default function AppBar() {
 
   return (
     <header
-      className={`grid grid-cols-3 items-center w-full pb-4.5 pt-10.5 ${
+      className={`fixed grid grid-cols-3 items-center w-full pb-4.5 pt-10.5 top-0 z-10 transition-colors ${
         isScrolling && "bg-surface-container"
       }`}
     >

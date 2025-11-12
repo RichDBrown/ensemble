@@ -1,0 +1,43 @@
+import Image from "next/image";
+import Clock from "@/public/clock.svg";
+import { getDaysBetween } from "@/app/dashboard/_utils/date/dates";
+import { useId } from "react";
+
+type StudyPlanProps = {
+  id: string;
+  subject: string;
+  testDate: Date;
+};
+
+export default function StudyPlan({ id, subject, testDate }: StudyPlanProps) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const progressId = useId();
+
+  return (
+    <div className="flex flex-col w-full p-4 bg-surface-container-low rounded-xl shadow-sm">
+      <div className="flex justify-between items-center">
+        <h2>{subject}</h2>
+        <div className="flex items-center gap-x-2">
+          <Image
+            src={Clock}
+            alt="Days left before test."
+            className="w-5 h-auto"
+            unoptimized={true}
+          />
+          <p className="text-sm text-on-surface-variant">{`${getDaysBetween(
+            today,
+            testDate
+          )} Days left`}</p>
+        </div>
+      </div>
+      <label
+        htmlFor={progressId}
+        className="mt-8 text-sm text-on-surface-variant"
+      >
+        Study progress
+      </label>
+      <progress max={100} value={70} className="mt-1 w-full h-2" />
+    </div>
+  );
+}

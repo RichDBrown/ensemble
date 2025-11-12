@@ -8,7 +8,14 @@ jest.mock("@/app/_utils/supabase/browser-client");
 
 function StudyPlanDialogWrapper() {
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
-  return <StudyPlanDialog setIsDialogOpen={setIsDialogOpen} />;
+  const [isCreatingNewStudyPlan, setIsCreatingNewStudyPlan] =
+    useState<boolean>(false);
+  return (
+    <StudyPlanDialog
+      setIsDialogOpen={setIsDialogOpen}
+      setIsCreatingNewStudyPlan={setIsCreatingNewStudyPlan}
+    />
+  );
 }
 
 describe("StudyPlanDialog", () => {

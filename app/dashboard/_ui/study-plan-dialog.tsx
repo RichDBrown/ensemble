@@ -3,10 +3,12 @@ import { Dispatch, FormEvent, SetStateAction, useId, useState } from "react";
 
 type StudyPlanDialogProps = {
   setIsDialogOpen: Dispatch<SetStateAction<boolean>>;
+  setIsCreatingNewStudyPlan: Dispatch<SetStateAction<boolean>>;
 };
 
 export default function StudyPlanDialog({
   setIsDialogOpen,
+  setIsCreatingNewStudyPlan,
 }: StudyPlanDialogProps) {
   const subjectId = useId();
   const testDateId = useId();
@@ -35,6 +37,7 @@ export default function StudyPlanDialog({
     if (error) {
       setIsErrorCreatingStudyPlan(true);
     } else {
+      setIsCreatingNewStudyPlan(true);
       setIsDialogOpen(false);
     }
   }

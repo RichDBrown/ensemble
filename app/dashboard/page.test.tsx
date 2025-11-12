@@ -1,4 +1,4 @@
-import { act, render, screen, waitFor } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import DashboardPage from "./page";
 import userEvent, { UserEvent } from "@testing-library/user-event";
 
@@ -15,29 +15,41 @@ const getUserMock = jest.fn().mockResolvedValue({
   data: { user: { user_metadata: { firstName: "Peter" } } },
 });
 
-const fromMock = jest.fn();
+const insertMock = jest.fn();
+const selectMock = jest.fn().mockResolvedValue({
+  data: [
+    { id: "1", subject: "Math", test_date: "2025-11-13" },
+    { id: "2", subject: "Biology", test_date: "2025-12-01" },
+  ],
+  error: null,
+});
 
 jest.mock("@/app/_utils/supabase/browser-client", () => ({
   createClient: jest.fn(() => ({
     auth: {
       getUser: getUserMock,
     },
-    from: fromMock,
+    from: jest.fn().mockReturnValue({ insert: insertMock, select: selectMock }),
   })),
 }));
 
 describe("DashboardPage", () => {
   let user: UserEvent;
   beforeAll(() => (user = userEvent.setup()));
-  beforeEach(() =>
-    act(() => {
-      render(<DashboardPage />);
-    })
-  );
+  beforeEach(() => render(<DashboardPage />));
 
   it("renders main correctly", () => {
     const main = screen.getByRole("main");
     expect(main).toHaveClass("flex flex-col items-center");
+  });
+
+  it("renders section correctly", () => {
+    const section = screen.getByRole("heading", {
+      level: 1,
+      name: "Study plans",
+    }).parentElement?.nextElementSibling;
+
+    expect(section).toHaveClass("flex flex-col gap-y-2 w-full pt-27 pb-4 px-4");
   });
 
   it("opens dialog when user presses fab", async () => {
@@ -47,8 +59,7 @@ describe("DashboardPage", () => {
   });
 
   it("closes dialog when user successfully creates new study plan", async () => {
-    const insertMock = jest.fn().mockResolvedValue({ error: null });
-    fromMock.mockReturnValue({ insert: insertMock });
+    insertMock.mockResolvedValue({ error: null });
 
     const fab = screen.getByRole("button", { name: "Create new study plan." });
     await user.click(fab);

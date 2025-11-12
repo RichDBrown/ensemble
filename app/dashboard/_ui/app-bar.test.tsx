@@ -24,7 +24,7 @@ describe("AppBar", () => {
   it("renders app bar correctly", () => {
     const header = screen.getByRole("banner");
     expect(header).toHaveClass(
-      "grid grid-cols-3 items-center w-full pb-4.5 pt-10.5"
+      "fixed grid grid-cols-3 items-center w-full pb-4.5 pt-10.5 top-0 z-10 transition-colors"
     );
 
     act(() => {
