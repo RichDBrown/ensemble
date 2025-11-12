@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Logo from "@/public/logo.svg";
 import Link from "next/link";
-import { createClient } from "../../_utils/_api/supabase-browser-client";
+import { createClient } from "@/app/_utils/supabase/browser-client";
 import { FormEvent, useState } from "react";
 import ConfirmEmailDialog from "../_ui/confirm-email-dialog";
 
@@ -36,17 +36,7 @@ export default function SignUpPage() {
   }
 
   return (
-    <main className="flex flex-col items-center pt-16 px-4">
-      <div className="flex items-center gap-x-4">
-        <Image
-          src={Logo}
-          alt="Logo."
-          className="h-10 w-auto"
-          priority={true}
-          unoptimized={true}
-        />
-        <h1 className="text-2xl font-medium">Ensemble</h1>
-      </div>
+    <>
       <div className="flex flex-col mt-16 w-full">
         <h2 className="text-3xl font-medium">Sign Up</h2>
         <p className="mt-1 text-sm text-on-surface-variant">
@@ -85,6 +75,6 @@ export default function SignUpPage() {
         </form>
       </div>
       {isDialogOpen && <ConfirmEmailDialog setIsDialogOpen={setIsDialogOpen} />}
-    </main>
+    </>
   );
 }

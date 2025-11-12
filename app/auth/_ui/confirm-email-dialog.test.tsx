@@ -13,7 +13,7 @@ describe("ConfirmEmailDialog", () => {
   it("renders scrim correctly", () => {
     const scrim = screen.getByRole("dialog").parentElement;
     expect(scrim).toHaveClass(
-      "fixed flex justify-center items-center px-4 top-0 w-full h-screen bg-scrim/32"
+      "fixed flex justify-center items-center z-20 px-4 top-0 w-full h-screen bg-scrim/32"
     );
   });
 

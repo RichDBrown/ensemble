@@ -111,3 +111,15 @@ body {
   color: var(--color-on-surface);
   font-family: Arial, sans-serif;
 }
+
+progress::-webkit-progress-bar {
+  @apply bg-secondary-container rounded-full;
+}
+
+progress::-webkit-progress-value {
+  @apply bg-primary rounded-full;
+}
+
+progress::-moz-progress-bar {
+  @apply bg-primary rounded-full;
+}
