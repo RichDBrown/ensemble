@@ -1,4 +1,5 @@
 import { createClient } from "@/app/_utils/supabase/browser-client";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function AppBar() {
@@ -42,9 +43,12 @@ export default function AppBar() {
     >
       <div />
       <h1 className="justify-self-center text-xl">Study plans</h1>
-      <div className="flex justify-center items-center justify-self-end mr-3 w-8 h-8 text-xl text-on-tertiary rounded-full bg-tertiary">
+      <Link
+        href="/profile"
+        className="flex justify-center items-center justify-self-end mr-3 w-8 h-8 text-xl text-on-tertiary rounded-full bg-tertiary hover:bg-[#C8B2D9] active:bg-[#C8B2D9] transition-colors"
+      >
         {initial}
-      </div>
+      </Link>
     </header>
   );
 }

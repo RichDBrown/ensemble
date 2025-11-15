@@ -42,10 +42,11 @@ describe("AppBar", () => {
     expect(heading).toHaveClass("justify-self-center text-xl");
   });
 
-  it("renders profile icon correctly", () => {
-    const profileIcon = screen.getByText("P");
+  it("renders profile link correctly", () => {
+    const profileIcon = screen.getByRole("link", { name: "P" });
     expect(profileIcon).toHaveClass(
-      "flex justify-center items-center justify-self-end mr-3 w-8 h-8 text-xl text-on-tertiary rounded-full bg-tertiary"
+      "flex justify-center items-center justify-self-end mr-3 w-8 h-8 text-xl text-on-tertiary rounded-full bg-tertiary hover:bg-[#C8B2D9] active:bg-[#C8B2D9] transition-colors"
     );
+    expect(profileIcon).toHaveAttribute("href", "/profile");
   });
 });
