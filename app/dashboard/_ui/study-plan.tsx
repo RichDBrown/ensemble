@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Clock from "@/public/clock.svg";
-import { getDaysBetween } from "@/app/dashboard/_utils/date/dates";
+import { getDaysBetween } from "@/app/_utils/date/dates";
 import { useId } from "react";
+import Link from "next/link";
 
 type StudyPlanProps = {
   id: string;
@@ -15,7 +16,10 @@ export default function StudyPlan({ id, subject, testDate }: StudyPlanProps) {
   const progressId = useId();
 
   return (
-    <div className="flex flex-col w-full p-4 bg-surface-container-low rounded-xl shadow-sm">
+    <Link
+      href={`/study-plan/${id}`}
+      className="flex flex-col w-full p-4 bg-surface-container-low rounded-xl shadow-sm"
+    >
       <div className="flex justify-between items-center">
         <h2>{subject}</h2>
         <div className="flex items-center gap-x-2">
@@ -38,6 +42,6 @@ export default function StudyPlan({ id, subject, testDate }: StudyPlanProps) {
         Study progress
       </label>
       <progress max={100} value={70} className="mt-1 w-full h-2" />
-    </div>
+    </Link>
   );
 }

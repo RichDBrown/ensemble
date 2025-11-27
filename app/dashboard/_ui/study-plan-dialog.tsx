@@ -3,12 +3,12 @@ import { Dispatch, FormEvent, SetStateAction, useId, useState } from "react";
 
 type StudyPlanDialogProps = {
   setIsDialogOpen: Dispatch<SetStateAction<boolean>>;
-  setIsCreatingNewStudyPlan: Dispatch<SetStateAction<boolean>>;
+  setRefreshKey: Dispatch<SetStateAction<number>>;
 };
 
 export default function StudyPlanDialog({
   setIsDialogOpen,
-  setIsCreatingNewStudyPlan,
+  setRefreshKey,
 }: StudyPlanDialogProps) {
   const subjectId = useId();
   const testDateId = useId();
@@ -27,7 +27,7 @@ export default function StudyPlanDialog({
       .value;
 
     const supabase = createClient();
-    const { error } = await supabase.from("study_plan").insert([
+    const { error } = await supabase.from("study_plans").insert([
       {
         subject: subject,
         test_date: testDate,
@@ -37,7 +37,7 @@ export default function StudyPlanDialog({
     if (error) {
       setIsErrorCreatingStudyPlan(true);
     } else {
-      setIsCreatingNewStudyPlan(true);
+      setRefreshKey((prev) => prev + 1);
       setIsDialogOpen(false);
     }
   }

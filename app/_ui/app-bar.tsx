@@ -2,7 +2,11 @@ import { createClient } from "@/app/_utils/supabase/browser-client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-export default function AppBar() {
+type AppBarProps = {
+  heading: string;
+};
+
+export default function AppBar({ heading }: AppBarProps) {
   const [isScrolling, setIsScrolling] = useState<boolean>(false);
   const [initial, setUserInitial] = useState<string>();
 
@@ -42,7 +46,7 @@ export default function AppBar() {
       }`}
     >
       <div />
-      <h1 className="justify-self-center text-xl">Study plans</h1>
+      <h1 className="justify-self-center text-xl">{heading}</h1>
       <Link
         href="/profile"
         className="flex justify-center items-center justify-self-end mr-3 w-8 h-8 text-xl text-on-tertiary rounded-full bg-tertiary hover:bg-[#C8B2D9] active:bg-[#C8B2D9] transition-colors"

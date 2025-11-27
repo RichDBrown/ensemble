@@ -17,7 +17,7 @@ jest.mock("@/app/_utils/supabase/browser-client", () => ({
 describe("AppBar", () => {
   beforeEach(() =>
     act(() => {
-      render(<AppBar />);
+      render(<AppBar heading="Study plans" />);
     })
   );
 

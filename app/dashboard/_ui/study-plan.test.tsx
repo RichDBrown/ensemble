@@ -4,26 +4,24 @@ import StudyPlan from "./study-plan";
 describe("StudyPlan", () => {
   beforeAll(() => {
     jest.useFakeTimers();
-    jest.setSystemTime(new Date("2025-11-10"));
+    jest.setSystemTime(new Date("2025-11-10T00:00:00"));
   });
   beforeEach(() =>
     render(
       <StudyPlan
         id="1234567"
         subject="Calculus"
-        testDate={new Date("2025-11-10")}
+        testDate={new Date("2025-11-10T00:00:00")}
       />
     )
   );
 
-  it("renders parent container correctly", () => {
-    const parentContainer = screen.getByRole("heading", {
-      name: "Calculus",
-      level: 2,
-    }).parentElement?.parentElement;
-    expect(parentContainer).toHaveClass(
+  it("renders link correctly", () => {
+    const link = screen.getByRole("link");
+    expect(link).toHaveClass(
       "flex flex-col w-full p-4 bg-surface-container-low rounded-xl shadow-sm"
     );
+    expect(link).toHaveAttribute("href", "/study-plan/1234567");
   });
 
   it("renders subject container correctly", () => {
@@ -35,7 +33,7 @@ describe("StudyPlan", () => {
   });
 
   it("renders days left container correctly", () => {
-    const daysLeftContainer = screen.getByText("1 Days left").parentElement;
+    const daysLeftContainer = screen.getByText("0 Days left").parentElement;
     expect(daysLeftContainer).toHaveClass("flex items-center gap-x-2");
   });
 
@@ -45,7 +43,7 @@ describe("StudyPlan", () => {
   });
 
   it("renders days left correctly", () => {
-    const daysLeftText = screen.getByText("1 Days left");
+    const daysLeftText = screen.getByText("0 Days left");
     expect(daysLeftText).toHaveClass("text-sm text-on-surface-variant");
   });
 
