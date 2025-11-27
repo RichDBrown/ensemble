@@ -8,12 +8,11 @@ jest.mock("@/app/_utils/supabase/browser-client");
 
 function StudyPlanDialogWrapper() {
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
-  const [isCreatingNewStudyPlan, setIsCreatingNewStudyPlan] =
-    useState<boolean>(false);
+  const [refreshKey, setRefreshKey] = useState<number>(0);
   return (
     <StudyPlanDialog
       setIsDialogOpen={setIsDialogOpen}
-      setIsCreatingNewStudyPlan={setIsCreatingNewStudyPlan}
+      setRefreshKey={setRefreshKey}
     />
   );
 }
