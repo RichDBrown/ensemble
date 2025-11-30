@@ -9,6 +9,14 @@ import { createClient } from "../_utils/supabase/browser-client";
 import StudyPlan from "./_ui/study-plan";
 import { StudyPlan as StudyPlanType } from "./_utils/types";
 
+function getProgress(quizzes: { is_complete: boolean }[]): number {
+  let completed: number = 0;
+  for (const quiz of quizzes) {
+    if (quiz.is_complete === true) completed++;
+  }
+  return (completed / quizzes.length) * 100;
+}
+
 export default function DashboardPage() {
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const router = useRouter();
@@ -33,22 +41,28 @@ export default function DashboardPage() {
         return;
       }
 
-      const { data: study_plan, error } = await supabase
-        .from("study_plans")
-        .select("id,subject,test_date");
+      const { data: study_plans, error } = await supabase.from("study_plans")
+        .select(`
+          id,
+          subject,
+          test_date,
+          quizzes (
+            is_complete
+          )
+          `);
       if (error) {
         setIsLoading(false);
         setIsErrorFetchingStudyPlans(true);
         return;
       } else {
-        const transformed =
-          study_plan?.map((plan) => ({
-            id: plan.id,
-            subject: plan.subject,
-            testDate: plan.test_date,
-          })) || [];
-        setStudyPlans(transformed);
+        const studyPlans: StudyPlanType[] = study_plans.map((plan) => ({
+          id: plan.id,
+          subject: plan.subject,
+          testDate: plan.test_date,
+          progress: getProgress(plan.quizzes),
+        }));
         setIsLoading(false);
+        setStudyPlans(studyPlans);
       }
     }
 
@@ -69,6 +83,7 @@ export default function DashboardPage() {
               id={plan.id}
               subject={plan.subject}
               testDate={new Date(plan.testDate)}
+              progress={plan.progress}
             />
           ))}
         </section>

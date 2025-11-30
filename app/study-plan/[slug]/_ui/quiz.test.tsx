@@ -70,9 +70,7 @@ describe("Quiz", () => {
       name: "Quiz 1",
       level: 2,
     }).parentElement;
-    expect(titleContainer).toHaveClass(
-      "flex items-center justify-between w-full"
-    );
+    expect(titleContainer).toHaveClass("flex justify-between w-full");
   });
 
   it("renders quiz status correctly when completed", () => {

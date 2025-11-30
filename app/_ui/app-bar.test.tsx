@@ -39,7 +39,7 @@ describe("AppBar", () => {
       level: 1,
       name: "Study plans",
     });
-    expect(heading).toHaveClass("justify-self-center text-xl");
+    expect(heading).toHaveClass("justify-self-center text-xl text-center");
   });
 
   it("renders profile link correctly", () => {

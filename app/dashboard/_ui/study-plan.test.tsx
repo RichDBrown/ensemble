@@ -12,6 +12,7 @@ describe("StudyPlan", () => {
         id="1234567"
         subject="Calculus"
         testDate={new Date("2025-11-10T00:00:00")}
+        progress={65}
       />
     )
   );

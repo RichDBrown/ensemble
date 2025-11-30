@@ -19,18 +19,39 @@ jest.mock("@/app/_utils/supabase/browser-client", () => ({
         data: {
           user: {
             id: "1",
-            user_metadata: {
-              firstName: "Richie",
-            },
+            user_metadata: { firstName: "Richie" },
           },
         },
       }),
     },
-    from: () => ({
+    from: (table: string) => ({
       select: () => ({
-        eq: () => ({
-          single: singleMock,
-        }),
+        eq: () => {
+          if (table === "study_plans") {
+            return { single: singleMock };
+          }
+          if (table === "quizzes") {
+            return {
+              data: [
+                {
+                  id: 1,
+                  quiz_title: "Sample Quiz 1",
+                  description: "This is a sample quiz description 1.",
+                  available_date: "2025-11-26",
+                  is_complete: false,
+                },
+                {
+                  id: 2,
+                  quiz_title: "Sample Quiz 2",
+                  description: "This is a sample quiz description 2.",
+                  available_date: "2025-12-01",
+                  is_complete: false,
+                },
+              ],
+              error: null,
+            };
+          }
+        },
       }),
     }),
   }),
@@ -111,7 +132,7 @@ describe("StudyPlanPage", () => {
     );
     const quizzesSection = screen.getByRole("main").lastElementChild;
     expect(quizzesSection).toHaveClass(
-      "flex flex-col gap-y-2 w-full pt-27 pb-4"
+      "flex flex-col gap-y-2 w-full pt-33 pb-4"
     );
   });
 });

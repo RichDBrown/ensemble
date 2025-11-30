@@ -43,7 +43,7 @@ export default function Quiz({
         getDaysBetween(new Date(), availableDate) !== 0 && "cursor-not-allowed"
       }`}
     >
-      <div className="flex items-center justify-between w-full">
+      <div className="flex justify-between w-full gap-x-2">
         <h2>{quizTitle}</h2>
         {getDaysBetween(new Date(), availableDate) === 0 && (
           <p className={`${isComplete ? "text-tertiary" : "text-primary"}`}>
