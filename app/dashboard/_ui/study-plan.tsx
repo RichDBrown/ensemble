@@ -8,9 +8,15 @@ type StudyPlanProps = {
   id: string;
   subject: string;
   testDate: Date;
+  progress: number;
 };
 
-export default function StudyPlan({ id, subject, testDate }: StudyPlanProps) {
+export default function StudyPlan({
+  id,
+  subject,
+  testDate,
+  progress,
+}: StudyPlanProps) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const progressId = useId();
@@ -41,7 +47,7 @@ export default function StudyPlan({ id, subject, testDate }: StudyPlanProps) {
       >
         Study progress
       </label>
-      <progress max={100} value={70} className="mt-1 w-full h-2" />
+      <progress max={100} value={progress} className="mt-1 w-full h-2" />
     </Link>
   );
 }

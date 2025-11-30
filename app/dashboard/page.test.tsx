@@ -28,8 +28,18 @@ const insertMock = jest.fn();
 
 const selectMock = jest.fn().mockResolvedValue({
   data: [
-    { id: "1", subject: "Math", test_date: "2025-11-13" },
-    { id: "2", subject: "Biology", test_date: "2025-12-01" },
+    {
+      id: "1",
+      subject: "Math",
+      test_date: "2025-11-13",
+      quizzes: [{ is_complete: true }, { is_complete: false }],
+    },
+    {
+      id: "2",
+      subject: "Biology",
+      test_date: "2025-12-01",
+      quizzes: [],
+    },
   ],
   error: null,
 });

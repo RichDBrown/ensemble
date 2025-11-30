@@ -83,8 +83,13 @@ export default function StudyPlanPage({ params }: StudyPlanPageProps) {
         setIsLoading(false);
         setIsErrorFetchingData(true);
       } else {
+        const sorted = quizzes.sort(
+          (a, b) =>
+            new Date(a.available_date).getTime() -
+            new Date(b.available_date).getTime()
+        );
         setIsLoading(false);
-        setQuizzes(quizzes);
+        setQuizzes(sorted);
       }
     }
 
@@ -134,7 +139,7 @@ export default function StudyPlanPage({ params }: StudyPlanPageProps) {
         </section>
       )}
       {!isLoading && !isErrorFetchingData && (
-        <section className="flex flex-col gap-y-2 w-full pt-27 pb-4">
+        <section className="flex flex-col gap-y-2 w-full pt-33 pb-4">
           {quizzes?.map((quiz, index) => (
             <Quiz
               key={index}
