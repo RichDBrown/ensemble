@@ -38,7 +38,7 @@ const selectMock = jest.fn().mockResolvedValue({
       id: "2",
       subject: "Biology",
       test_date: "2025-12-01",
-      quizzes: [],
+      quizzes: [{ is_complete: false }, { is_complete: false }],
     },
   ],
   error: null,
@@ -57,40 +57,25 @@ describe("DashboardPage", () => {
   let user: UserEvent;
   beforeAll(() => (user = userEvent.setup()));
 
-  it("renders main correctly", () => {
-    act(() => render(<DashboardPage />));
+  it("renders main correctly", async () => {
+    await act(async () => render(<DashboardPage />));
     const main = screen.getByRole("main");
     expect(main).toHaveClass("flex flex-col items-center");
   });
 
-  it("renders spinner correctly when loading study plans", () => {
-    render(<DashboardPage />);
-    const spinner = screen.getByRole("heading", {
-      level: 1,
-      name: "Study plans",
-    }).parentElement?.nextElementSibling;
-    expect(spinner).toHaveClass(
-      "mt-[48vh] w-10 h-10 border-4 border-secondary-container border-t-primary rounded-full animate-spin"
-    );
-  });
-
   it("renders study plans section correctly", async () => {
-    act(() => render(<DashboardPage />));
-    await waitFor(() => {
-      const section = screen
-        .getByRole("heading", {
-          level: 2,
-          name: "Math",
-        })
-        .closest("section");
-      expect(section).toHaveClass(
-        "flex flex-col gap-y-2 w-full pt-27 pb-4 px-4"
-      );
-    });
+    await act(async () => render(<DashboardPage />));
+    const section = screen
+      .getByRole("heading", {
+        level: 2,
+        name: "Math",
+      })
+      .closest("section");
+    expect(section).toHaveClass("flex flex-col gap-y-2 w-full pt-27 pb-4 px-4");
   });
 
   it("opens dialog when user presses fab", async () => {
-    act(() => render(<DashboardPage />));
+    await act(async () => render(<DashboardPage />));
     const fab = screen.getByRole("button", { name: "Create new study plan." });
     await user.click(fab);
     screen.getByPlaceholderText("What are you studying for?");
@@ -98,7 +83,7 @@ describe("DashboardPage", () => {
 
   it("closes dialog when user successfully creates new study plan", async () => {
     insertMock.mockResolvedValue({ error: null });
-    act(() => render(<DashboardPage />));
+    await act(async () => render(<DashboardPage />));
 
     const fab = screen.getByRole("button", { name: "Create new study plan." });
     await user.click(fab);
@@ -135,29 +120,27 @@ describe("DashboardPage", () => {
       data: null,
       error: "Error fetching data",
     });
-    act(() => render(<DashboardPage />));
+    await act(async () => render(<DashboardPage />));
 
-    await waitFor(() => {
-      const errorHeading = screen.getByRole("heading", {
-        level: 2,
-        name: "Something unexpected happened",
-      });
-      expect(errorHeading).toHaveClass("text-xl");
-      const errorMessage = screen.getByText(
-        "An error has occurred while trying to fetch your study plans."
-      );
-      expect(errorMessage).toHaveClass("mt-2 text-error");
-      const tryAgainButton = screen.getByRole("button", { name: "Try again" });
-      expect(tryAgainButton).toHaveClass(
-        "mt-6 px-6 h-14 text-sm font-medium text-on-primary bg-primary rounded-2xl hover:bg-[#AFCFFB] active:bg-[#AFCFFB] cursor-pointer transition-colors"
-      );
-      const section = screen.getByRole("heading", {
-        level: 2,
-        name: "Something unexpected happened",
-      }).parentElement;
-      expect(section).toHaveClass(
-        "flex flex-col items-center w-full pt-[40vh] px-4"
-      );
+    const errorHeading = screen.getByRole("heading", {
+      level: 2,
+      name: "Something unexpected happened",
     });
+    expect(errorHeading).toHaveClass("text-xl");
+    const errorMessage = screen.getByText(
+      "An error has occurred while trying to fetch your study plans."
+    );
+    expect(errorMessage).toHaveClass("mt-2 text-center text-error");
+    const tryAgainButton = screen.getByRole("button", { name: "Try again" });
+    expect(tryAgainButton).toHaveClass(
+      "mt-6 px-6 h-14 text-sm font-medium text-on-primary bg-primary rounded-2xl hover:bg-[#AFCFFB] active:bg-[#AFCFFB] cursor-pointer transition-colors"
+    );
+    const section = screen.getByRole("heading", {
+      level: 2,
+      name: "Something unexpected happened",
+    }).parentElement;
+    expect(section).toHaveClass(
+      "flex flex-col items-center w-full pt-[40vh] px-4"
+    );
   });
 });

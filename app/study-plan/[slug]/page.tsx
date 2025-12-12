@@ -38,10 +38,10 @@ export default function StudyPlanPage({ params }: StudyPlanPageProps) {
         return;
       }
 
-      fetchStudyPlan();
+      loadQuizzes();
     }
 
-    async function fetchStudyPlan() {
+    async function loadQuizzes() {
       const { data: study_plan, error } = await supabase
         .from("study_plans")
         .select("subject,test_date,topics,is_first_load")
@@ -127,7 +127,7 @@ export default function StudyPlanPage({ params }: StudyPlanPageProps) {
       {!isLoading && isErrorFetchingData && (
         <section className="flex flex-col items-center w-full pt-[40vh]">
           <h2 className="text-xl">Something unexpected happened</h2>
-          <p className="mt-2 text-error">
+          <p className="mt-2 text-center text-error">
             An error has occurred while trying to fetch your quizzes.
           </p>
           <button

@@ -18,7 +18,7 @@ describe("Quiz", () => {
     );
   });
 
-  it("renders quiz container background color correctly when quiz is completed", () => {
+  it("renders cursor and quiz container background color correctly when quiz is completed", () => {
     render(
       <Quiz
         id="1234"
@@ -32,7 +32,7 @@ describe("Quiz", () => {
       name: "Quiz 1",
       level: 2,
     }).parentElement?.parentElement;
-    expect(quizContainer).toHaveClass("border-tertiary");
+    expect(quizContainer).toHaveClass("border-tertiary cursor-not-allowed");
   });
 
   it("renders cursor and the quiz container background color correctly when quiz is not available", () => {

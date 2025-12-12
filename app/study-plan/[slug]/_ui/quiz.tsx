@@ -34,13 +34,15 @@ export default function Quiz({
     <Link
       href={`/quiz/${id}`}
       onClick={(e) => {
-        if (getDaysBetween(new Date(), availableDate) !== 0) e.preventDefault();
+        if (getDaysBetween(new Date(), availableDate) !== 0 || isComplete)
+          e.preventDefault();
       }}
       className={`flex flex-col p-4 w-full bg-surface-container-low border ${getBorderColor(
         availableDate,
         isComplete
       )} rounded-lg ${
-        getDaysBetween(new Date(), availableDate) !== 0 && "cursor-not-allowed"
+        (getDaysBetween(new Date(), availableDate) !== 0 || isComplete) &&
+        "cursor-not-allowed"
       }`}
     >
       <div className="flex justify-between w-full gap-x-2">
