@@ -28,6 +28,7 @@ export default function DashboardPage() {
 
   useEffect(() => {
     setIsErrorFetchingStudyPlans(false);
+    setIsLoading(true);
 
     async function fetchStudyPlans() {
       const supabase = createClient();
@@ -91,7 +92,7 @@ export default function DashboardPage() {
       {!isLoading && isErrorFetchingStudyPlans && (
         <section className="flex flex-col items-center w-full pt-[40vh] px-4">
           <h2 className="text-xl">Something unexpected happened</h2>
-          <p className="mt-2 text-error">
+          <p className="mt-2 text-center text-error">
             An error has occurred while trying to fetch your study plans.
           </p>
           <button

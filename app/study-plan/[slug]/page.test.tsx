@@ -114,7 +114,7 @@ describe("StudyPlanPage", () => {
     const errorMessage = screen.getByText(
       "An error has occurred while trying to fetch your quizzes."
     );
-    expect(errorMessage).toHaveClass("mt-2 text-error");
+    expect(errorMessage).toHaveClass("mt-2 text-center text-error");
     const tryAgainButton = screen.getByRole("button", { name: "Try again" });
     expect(tryAgainButton).toHaveClass(
       "mt-6 px-6 h-14 text-sm font-medium text-on-primary bg-primary rounded-2xl hover:bg-[#AFCFFB] active:bg-[#AFCFFB] cursor-pointer transition-colors"

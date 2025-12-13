@@ -1,6 +1,5 @@
 "use client";
-import Image from "next/image";
-import Logo from "@/public/logo.svg";
+
 import Link from "next/link";
 import { createClient } from "@/app/_utils/supabase/browser-client";
 import { FormEvent, useState } from "react";
