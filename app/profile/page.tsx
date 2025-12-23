@@ -33,7 +33,7 @@ export default function ProfilePage() {
   }, [router, isSigningOut]);
 
   return (
-    <main className="flex flex-col items-center pt-27">
+    <>
       <AppBar />
       <div className="flex justify-center items-center h-30 w-30 text-6xl text-on-tertiary bg-tertiary rounded-full">
         {initial}
@@ -58,6 +58,6 @@ export default function ProfilePage() {
           An error has occurred please try again later.
         </p>
       )}
-    </main>
+    </>
   );
 }

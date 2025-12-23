@@ -27,11 +27,6 @@ describe("ProfilePage", () => {
   beforeAll(() => (user = userEvent.setup()));
   beforeEach(() => act(() => render(<ProfilePage />)));
 
-  it("renders main correctly", () => {
-    const main = screen.getByRole("main");
-    expect(main).toHaveClass("flex flex-col items-center pt-27");
-  });
-
   it("renders profile icon correctly", () => {
     const profileIcon = screen.getByText("P");
     expect(profileIcon).toHaveClass(

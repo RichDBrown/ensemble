@@ -71,7 +71,7 @@ export default function DashboardPage() {
   }, [router, refreshKey]);
 
   return (
-    <main className="flex flex-col items-center">
+    <>
       <AppBar heading="Study plans" />
       {isLoading && (
         <div className="mt-[48vh] w-10 h-10 border-4 border-secondary-container border-t-primary rounded-full animate-spin" />
@@ -110,6 +110,6 @@ export default function DashboardPage() {
         />
       )}
       <FAB setIsDialogOpen={setIsDialogOpen} />
-    </main>
+    </>
   );
 }

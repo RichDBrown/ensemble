@@ -119,7 +119,7 @@ export default function StudyPlanPage({ params }: StudyPlanPageProps) {
   }, [router, refreshKey]);
 
   return (
-    <main className="flex flex-col items-center px-4">
+    <>
       <AppBar heading={heading} />
       {isLoading && (
         <div className="mt-[48vh] w-10 h-10 border-4 border-secondary-container border-t-primary rounded-full animate-spin" />
@@ -152,6 +152,6 @@ export default function StudyPlanPage({ params }: StudyPlanPageProps) {
           ))}
         </section>
       )}
-    </main>
+    </>
   );
 }

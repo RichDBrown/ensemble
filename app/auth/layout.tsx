@@ -1,5 +1,10 @@
 import Image from "next/image";
 import Logo from "@/public/logo.svg";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  robots: { index: false },
+};
 
 export default function AuthLayout({
   children,

@@ -57,12 +57,6 @@ describe("DashboardPage", () => {
   let user: UserEvent;
   beforeAll(() => (user = userEvent.setup()));
 
-  it("renders main correctly", async () => {
-    await act(async () => render(<DashboardPage />));
-    const main = screen.getByRole("main");
-    expect(main).toHaveClass("flex flex-col items-center");
-  });
-
   it("renders study plans section correctly", async () => {
     await act(async () => render(<DashboardPage />));
     const section = screen

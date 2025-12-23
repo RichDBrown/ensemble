@@ -102,7 +102,7 @@ describe("SignUpPage", () => {
     expect(errorMessage).toHaveClass("self-center mt-4 text-sm text-error");
   });
 
-  it("shows model when sign up is successful", async () => {
+  it("shows dialog when sign up is successful", async () => {
     signInWithOtpMock.mockResolvedValueOnce({
       data: { user: { id: "123" } },
       error: null,

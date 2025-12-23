@@ -133,7 +133,7 @@ export default function QuizPage({ params }: QuizPageProps) {
   }, [router, refreshKey]);
 
   return (
-    <main className="flex flex-col items-center px-4">
+    <>
       <AppBar title={title} />
       {isLoading && (
         <div className="mt-[48vh] w-10 h-10 border-4 border-secondary-container border-t-primary rounded-full animate-spin" />
@@ -198,6 +198,6 @@ export default function QuizPage({ params }: QuizPageProps) {
           </div>
         </>
       )}
-    </main>
+    </>
   );
 }
