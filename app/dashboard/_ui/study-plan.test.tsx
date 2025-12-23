@@ -58,5 +58,6 @@ describe("StudyPlan", () => {
   it("renders progress bar correctly", () => {
     const progressBar = screen.getByRole("progressbar");
     expect(progressBar).toHaveClass("mt-1 w-full h-2");
+    expect(progressBar).toHaveAttribute("value", "65");
   });
 });

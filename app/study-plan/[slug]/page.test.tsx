@@ -90,14 +90,6 @@ jest.mock("@/app/study-plan/[slug]/_server-actions/actions", () => ({
 }));
 
 describe("StudyPlanPage", () => {
-  it("renders main correctly", async () => {
-    await act(async () =>
-      render(<StudyPlanPage params={Promise.resolve({ slug: "12345" })} />)
-    );
-    const main = screen.getByRole("main");
-    expect(main).toHaveClass("flex flex-col items-center px-4");
-  });
-
   it("renders error message if error occurs when fetching quizzes", async () => {
     singleMock.mockResolvedValueOnce({
       data: null,
@@ -130,7 +122,12 @@ describe("StudyPlanPage", () => {
     await act(async () =>
       render(<StudyPlanPage params={Promise.resolve({ slug: "12345" })} />)
     );
-    const quizzesSection = screen.getByRole("main").lastElementChild;
+    const quizzesSection = screen
+      .getByRole("heading", {
+        level: 2,
+        name: "Sample Quiz 1",
+      })
+      .closest("section");
     expect(quizzesSection).toHaveClass(
       "flex flex-col gap-y-2 w-full pt-33 pb-4"
     );

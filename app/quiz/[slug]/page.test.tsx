@@ -91,15 +91,6 @@ describe("QuizPage", () => {
   let user: UserEvent;
   beforeAll(() => (user = userEvent.setup()));
 
-  it("renders main correctly", async () => {
-    await act(async () =>
-      render(<QuizPage params={Promise.resolve({ slug: "12345" })} />)
-    );
-
-    const main = screen.getByRole("main");
-    expect(main).toHaveClass("flex flex-col items-center px-4");
-  });
-
   it("renders error message if fails to fetch data", async () => {
     singleMock.mockResolvedValueOnce({
       data: null,
