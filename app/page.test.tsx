@@ -6,17 +6,21 @@ describe("LandingPage", () => {
 
   it("renders main correctly", () => {
     const main = screen.getByRole("main");
-    expect(main).toHaveClass("flex flex-col gap-y-21 pt-16 px-4");
+    expect(main).toHaveClass(
+      "flex flex-col items-center gap-y-21 pt-16 pb-6 md:pb-16 px-4"
+    );
   });
 
-  it("renders sections correctly", () => {
+  it("renders never cram again section correctly", () => {
     const section = screen
       .getByRole("heading", {
         level: 2,
         name: "Never Cram Again",
       })
       .closest("section");
-    expect(section).toHaveClass("flex flex-col items-center w-full");
+    expect(section).toHaveClass(
+      "flex flex-col items-center w-full md:max-w-139.75"
+    );
   });
 
   it("renders logo container container", () => {
@@ -44,14 +48,16 @@ describe("LandingPage", () => {
       level: 2,
       name: "Never Cram Again",
     });
-    expect(heading).toHaveClass("mt-16 text-3xl font-medium");
+    expect(heading).toHaveClass("mt-16 text-3xl md:text-6xl font-medium");
   });
 
   it("renders a smarter way to study subheading correctly", () => {
     const subheading = screen.getByText(
       "A smarter way to study, built on learning science, not last-minute stress."
     );
-    expect(subheading).toHaveClass("mt-4 text-center text-on-surface-variant");
+    expect(subheading).toHaveClass(
+      "mt-4 text-xl text-center text-on-surface-variant"
+    );
   });
 
   it("renders get started link correctly", () => {
@@ -60,7 +66,7 @@ describe("LandingPage", () => {
     });
 
     expect(getStartedLink).toHaveClass(
-      "flex items-center justify-center mt-6 w-full h-12 text-sm font-medium text-on-primary bg-primary rounded-2xl hover:bg-[#AFCFFB] active:bg-[#AFCFFB] transition-colors"
+      "flex items-center justify-center mt-6 w-full h-12 md:h-14 text-sm font-medium text-on-primary bg-primary rounded-2xl hover:bg-[#AFCFFB] active:bg-[#AFCFFB] transition-colors"
     );
 
     expect(getStartedLink).toHaveAttribute("href", "/dashboard");
@@ -73,7 +79,9 @@ describe("LandingPage", () => {
         name: "The Problems Students Face",
       })
       .closest("section");
-    expect(section).toHaveClass("flex flex-col items-center w-full");
+    expect(section).toHaveClass(
+      "flex flex-col items-center w-full md:max-w-205.75"
+    );
   });
 
   it("renders the problems students face heading correctly", () => {
@@ -81,7 +89,7 @@ describe("LandingPage", () => {
       level: 2,
       name: "The Problems Students Face",
     });
-    expect(heading).toHaveClass("text-center text-3xl font-medium");
+    expect(heading).toHaveClass("text-center text-3xl md:text-6xl font-medium");
   });
 
   it("renders you've been here before container correctly", () => {
@@ -124,7 +132,9 @@ describe("LandingPage", () => {
     const section = screen
       .getByRole("heading", { level: 2, name: "The Promise" })
       .closest("section");
-    expect(section).toHaveClass("flex flex-col items-center w-full");
+    expect(section).toHaveClass(
+      "flex flex-col items-center w-full md:max-w-205.75"
+    );
   });
 
   it("renders the promise heading correctly", () => {
@@ -132,7 +142,7 @@ describe("LandingPage", () => {
       level: 2,
       name: "The Promise",
     });
-    expect(heading).toHaveClass("text-center text-3xl font-medium");
+    expect(heading).toHaveClass("text-center text-3xl md:text-6xl font-medium");
   });
 
   it("renders never cram again container correctly", () => {
@@ -158,7 +168,9 @@ describe("LandingPage", () => {
     const section = screen
       .getByRole("heading", { level: 2, name: "How It Works" })
       .closest("section");
-    expect(section).toHaveClass("flex flex-col items-center w-full");
+    expect(section).toHaveClass(
+      "flex flex-col items-center w-full md:max-w-205.75"
+    );
   });
 
   it("renders how it works heading correctly", () => {
@@ -166,7 +178,7 @@ describe("LandingPage", () => {
       level: 2,
       name: "How It Works",
     });
-    expect(heading).toHaveClass("text-center text-3xl font-medium");
+    expect(heading).toHaveClass("text-center text-3xl md:text-6xl font-medium");
   });
 
   it("renders enter your course info text correctly", () => {
@@ -206,16 +218,18 @@ describe("LandingPage", () => {
   it("renders build my study plan link correctly", () => {
     const link = screen.getByRole("link", { name: "Build my study plan" });
     expect(link).toHaveClass(
-      "flex items-center justify-center mt-6 w-full h-12 text-sm font-medium text-on-primary bg-primary rounded-2xl hover:bg-[#AFCFFB] active:bg-[#AFCFFB] transition-colors"
+      "flex items-center justify-center md:hidden mt-6 w-full h-12 text-sm font-medium text-on-primary bg-primary rounded-2xl hover:bg-[#AFCFFB] active:bg-[#AFCFFB] transition-colors"
     );
     expect(link).toHaveAttribute("href", "/dashboard");
   });
 
-  it("renders how it works section correctly", () => {
+  it("renders why it works section correctly", () => {
     const section = screen
       .getByRole("heading", { level: 2, name: "Why It Works" })
       .closest("section");
-    expect(section).toHaveClass("flex flex-col items-center w-full");
+    expect(section).toHaveClass(
+      "flex flex-col items-center w-full md:max-w-205.75"
+    );
   });
 
   it("renders why it works heading correctly", () => {
@@ -223,7 +237,7 @@ describe("LandingPage", () => {
       level: 2,
       name: "Why It Works",
     });
-    expect(heading).toHaveClass("text-center text-3xl font-medium");
+    expect(heading).toHaveClass("text-center text-3xl md:text-6xl font-medium");
   });
 
   it("renders spaced repetition text correctly", () => {
@@ -276,7 +290,9 @@ describe("LandingPage", () => {
         name: "Start Studying the Way Your Brain is Designed to Learn",
       })
       .closest("section");
-    expect(section).toHaveClass("flex flex-col items-center w-full");
+    expect(section).toHaveClass(
+      "flex flex-col items-center w-full md:max-w-205.75"
+    );
   });
 
   it("renders start studying the way your brain is designed to learn heading correctly", () => {
@@ -284,7 +300,7 @@ describe("LandingPage", () => {
       level: 2,
       name: "Start Studying the Way Your Brain is Designed to Learn",
     });
-    expect(heading).toHaveClass("text-center text-3xl font-medium");
+    expect(heading).toHaveClass("text-center text-3xl md:text-6xl font-medium");
   });
 
   it("renders never cram again text correctly", () => {
@@ -295,7 +311,7 @@ describe("LandingPage", () => {
   it("renders create my study plan link correctly", () => {
     const link = screen.getByRole("link", { name: "Create my study plan" });
     expect(link).toHaveClass(
-      "flex items-center justify-center mt-6 w-full h-12 text-sm font-medium text-on-primary bg-primary rounded-2xl hover:bg-[#AFCFFB] active:bg-[#AFCFFB] transition-colors"
+      "flex items-center justify-center mt-6 w-full h-12 md:h-14 text-sm font-medium text-on-primary bg-primary rounded-2xl hover:bg-[#AFCFFB] active:bg-[#AFCFFB] transition-colors"
     );
     expect(link).toHaveAttribute("href", "/dashboard");
   });
